@@ -26,6 +26,7 @@ def product_url_scrap(link):
         for l in tls:
             try:
                 tl = "https://www.trademe.co.nz"+l['href']
+                tl = tl.split('?')[0]
                 if tl not in catItemLink:
                     catItemLink.append(tl)
             except:

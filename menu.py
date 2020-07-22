@@ -2,8 +2,7 @@ def showmenu():
     print("1. Start Scraping")
     print("2. MySQL Settings")
     print("3. Interruption Settings")
-    print("4. About")
-    print("5. Exit")
+    print("4. Exit")
 
 
 def inturruption_settings_menu():
@@ -18,17 +17,3 @@ def mysql_settings_menu():
     print("2. Enter User Name")
     print("3. Enter Password")
     print("4. Test Connection String")
-
-
-def show_about():
-    print("\n\n")
-    print("\t"+'='*5)
-    print('\tAbout the Author -')
-    print('\tMahmudul Hasan')
-    print('\tmahmudnotes@outlook.com')
-    print('\tmahmudx.com')
-    print('\tmahmudnotes.com\n')
-    print("\tIn association with -")
-    print("\tPritom Sarker Bishal")
-    print('\tme.pritom@gmail.com')
-    print('\t'+"="*5+'\n\n')

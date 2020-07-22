@@ -1,6 +1,5 @@
-from bs4 import BeautifulSoup
 import requests
-from product_info_scrapper import datetime_parser
+from product_info_scrapper import datetime_parser, BeautifulSoup
 parser = 'html.parser'
 
 

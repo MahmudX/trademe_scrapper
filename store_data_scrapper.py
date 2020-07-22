@@ -1,31 +1,9 @@
-from bs4 import BeautifulSoup
 import requests
 from datetime import datetime
 parser = "html.parser"
-
+from product_link_scrapper import BeautifulSoup
 
 def storescrap(url):
-    """
-    Takes an URL, and returns a list of dict object.
-
-    storename	
-
-    storeurl	
-
-    category_name	
-
-    category_url
-
-    item_no
-
-    datetime = "input datetime" [returns ""]
-
-    location = "needs to be updated" [returns ""]
-
-    feedback = "needs to be updated" [returns ""]
-
-    totallisting
-    """
     output = []
     total_item_count = 0
     r = requests.get(url)

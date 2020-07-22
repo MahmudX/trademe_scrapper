@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import requests
 import pandas as pd
@@ -6,7 +5,7 @@ import re
 import csv
 parser = 'html.parser'
 na = "N/A"
-
+from product_link_scrapper import BeautifulSoup
 
 def datetime_parser(closingdatestr):
     dt_format = '%a %d %b %Y, %I:%M %p'
@@ -62,9 +61,6 @@ def getproductinfo(url):
     except:
         username = na
 
-    # Phone Number(G)
-    pass
-
     # Listing ID(H), Title(I), Image URL(J)
 
     listingid = product_soup.find(
@@ -109,33 +105,6 @@ def getproductinfo(url):
         buynowprice = buynowprice.text
     else:
         buynowprice = "Empty"
-
-    ##
-    # Sold(P), Final Bid(Q), Closing Date+Time(R)
-    # Refills when the scrapper visits this page second time
-    ##
-    try:
-        closingtime = product_soup.find(
-            'span', {'id': 'ClosingTime_ClosingTime'}).text
-        closingtime = datetime_parser(closingtime)
-        finalbid = product_soup.find(
-            'div', {'class': 'bidding-title bidding-title-closed'})
-        if finalbid != None and str(finalbid.text).strip() == "Final bid":
-            sold = "Yes"
-            finalbid = product_soup.find(
-                'div', {'id': 'Bidding_CurrentBidValue'}).text
-        else:
-            finalbid = "Empty"
-            sold = "No"
-        visitcount = product_soup.find(
-            'div', {'class': 'page-count'}).find_all('span', {'class': 'digit'})
-        visitcounter = ''
-        for x in visitcount:
-            visitcounter += x.text
-    except:
-        sold = ''
-        finalbid = ''
-        closingtime = ''
 
     ##
     # No of bids(S),	Reserve met(T)
@@ -213,36 +182,5 @@ def getproductinfo(url):
     # Prints all the field scrapped form the product page
     ##
     result = {"store_name": store_name, "store_url": store_url, 'product_url': product_url, "bredcrumb": bredcrumb, "category": category, "username": username, "phone": '', 'listingID': listingid, 'title': title, 'imageurl':
-              imageurl, 'newitem': newitem, 'ping': ping, 'closingdate': closingdate, 'buynow': buynow, 'buynowprice': buynowprice, 'sold': "RE", 'finalbid': "RE", 'closingdatetime': "RE", 'totalbid': totalbid, 'reservedmet': reservedmet, 'description': description.strip(), 'shippingone': shippingone, 'shippingtwo': shippingtwo, 'storelocation': storelocation, 'feedback': feedback, 'visitcount': visitcounter, 'pickup': pickup, 'membersince': membersince, 'entrytime': entrytime}
-    """
-    print("Store (A):")
-    print("Store URL (B):")
-    print("Product URL (C):", product_url)
-    print("Breadcrumb (D):", bredcrumb)
-    print("Category Name (E):", category)
-    print("Username (F):", username)
-    print("Phone Number (G):")
-    print("List ID (H):", listingid)
-    print("Title (I):", title)
-    print("Image URL (J):", imageurl)
-    print("New Item (K):", newitem)
-    print("Ping (L):", ping)
-    print("Closing Date (M):", closingdate)
-    print("Buy Now? (N):", buynow)
-    print("Price (O):", buynowprice)
-    print("Sold (P):")
-    print("Final Bid (Q):")
-    print("Closed Time and Date (R):")
-    print("No of Bid (S):", totalbid)
-    print("Reserve Met (T):", reservedmet)
-    print("Details (U):", description.strip())
-    print("Shipping 1 (V):", shippingone)
-    print("Shipping 2 (W):", shippingtwo)
-    print("Store Location (X):", storelocation)
-    print("Feedback (Y):", feedback)
-    print("Visit Count (Z):", visitcounter)
-    print("Pickup (AA):", pickup)
-    print("Member Since (AB):", membersince)
-    print("Entry Time (AC):", entrytime)
-    """
+              imageurl, 'newitem': newitem, 'ping': ping, 'closingdate': closingdate, 'buynow': buynow, 'buynowprice': buynowprice, 'sold': "", 'finalbid': "", 'closingdatetime': "", 'totalbid': totalbid, 'reservedmet': reservedmet, 'description': description.strip(), 'shippingone': shippingone, 'shippingtwo': shippingtwo, 'storelocation': storelocation, 'feedback': feedback, 'visitcount': visitcounter, 'pickup': pickup, 'membersince': membersince, 'entrytime': entrytime}
     return result
