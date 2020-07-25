@@ -188,7 +188,7 @@ def revisit_page():
                         
                         sql = "SELECT * FROM productinfo WHERE listingID LIKE '"+x['listingID']+"'"
                         dff = pd.read_sql_query(sql, dbConnection)
-                        df.to_sql("soldproducts", dbConnection, if_exists='append')
+                        dff.to_sql("soldproducts", dbConnection, if_exists='append')
                         result.remove(x)
                         if sleeptime != '':
                             sleep(sleeptime)
