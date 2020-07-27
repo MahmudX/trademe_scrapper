@@ -336,4 +336,17 @@ def main():
 
 if __name__ == "__main__":
     username = password = server = enddate = sleeptime = dbConnection = ''
+    try:
+        with open('credentials.csv') as credentials_csv:
+            cred = list(reader(credentials_csv, delimiter=','))
+            for x in cred:
+                print(x)
+            server = cred[0][0]
+            password = cred[2][0]
+            username = cred[1][0]
+        print("Credntials restored")
+        print(username,password,server)
+    except Exception as e:
+        show_exception_message(e)
+    input("Press ENTER to cont.")
     main()
