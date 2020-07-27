@@ -259,8 +259,18 @@ def main():
                             print("The programm will end at ", str(enddate))
                         input(str(len(storeurl)) +
                               " store link(s) found. Press ENTER to proceed.")
-                        startscrapping()
-                        # process_store_link()
+                        try:
+                            with open('categoryurls.csv') as csv_file:
+                                catcsv = reader(csv_file, delimiter=',')
+                                for x in catcsv:
+                                    for y in x:
+                                        if y not in category:
+                                            category.append(y)
+                            print(len(category)," category URLs restored")
+                        except Exception as e:
+                            show_exception_message(e)
+                            print(len(category)," category URLs restored")
+                        startscrapping()                        
                 except Exception as exx:
                     print(
                         "Formal Cause: File named \'storeurls.csv\' wasn\'t found. " +
